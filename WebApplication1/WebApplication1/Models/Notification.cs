@@ -20,7 +20,7 @@ namespace WebApplication1.Models
         public DateTime date { get; set; }
         public int idType { get; set; }
         [ForeignKey("idType")]
-        public TypeOfNotification typeOfNotification { get; set; }
+        public TypeOfNotifications typeOfNotification { get; set; }
         public int idPost { get; set; }
         [ForeignKey("idPost")]
         public Post post { get; set; }

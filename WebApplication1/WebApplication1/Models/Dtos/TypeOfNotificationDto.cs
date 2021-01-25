@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.Dtos
 {
-    public class TypeOfNotifications
+    public class TypeOfNotificationDto
     {
         [Key]
         public int idType { get; set; }
@@ -15,11 +15,6 @@ namespace WebApplication1.Models
         [Required(ErrorMessage = "The message is required")]
         [StringLength(256, ErrorMessage = "Maximum characters is 100")]
         public string message { get; set; }
-        public bool state { get; set; }
-        public TypeOfNotifications()
-        {
-            this.state = true;
-        }
-
+        
     }
 }
