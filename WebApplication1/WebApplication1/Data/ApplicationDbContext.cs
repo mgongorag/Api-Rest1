@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplication1.Models;
 
 namespace WebApplication1.Data
 {
@@ -12,5 +13,13 @@ namespace WebApplication1.Data
         {
 
         }
+
+        public DbSet<Gender> Gender { get; set; }
+        public DbSet<ImagePost> ImagePost { get; set; }
+        public DbSet<Post> Post { get; set; }
+        public DbSet<TypeOfNotification> TypeOfNotifications { get; set; }
+        public DbSet<TypeOfPost> TypeOfPost { get; set; }
+        public DbSet<User> User { get; set; }
+
     }
 }
