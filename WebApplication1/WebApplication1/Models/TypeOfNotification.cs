@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models
 {
-    public class TypeOfNotification
+    public class TypeOfNotifications
     {
         [Key]
         public int idType { get; set; }
@@ -16,7 +16,7 @@ namespace WebApplication1.Models
         [StringLength(256, ErrorMessage = "Maximum characters is 100")]
         public string message { get; set; }
         public bool state { get; set; }
-        public TypeOfNotification()
+        public TypeOfNotifications()
         {
             this.state = true;
         }
