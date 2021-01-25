@@ -20,6 +20,8 @@ namespace WebApplication1.Data
         public DbSet<TypeOfNotification> TypeOfNotifications { get; set; }
         public DbSet<TypeOfPost> TypeOfPost { get; set; }
         public DbSet<User> User { get; set; }
+        public DbSet<ListFriend> ListFriend { get; set; }
+        public DbSet<Notification> Notification { get; set; }
 
     }
 }
