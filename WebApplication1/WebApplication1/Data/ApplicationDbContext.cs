@@ -12,6 +12,13 @@ namespace WebApplication1.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
+        
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ListFriend>()
+                .HasKey(c => new { c.idUser, c.idFriend});
         }
 
         public DbSet<Gender> Gender { get; set; }
@@ -22,6 +29,7 @@ namespace WebApplication1.Data
         public DbSet<User> User { get; set; }
         public DbSet<ListFriend> ListFriend { get; set; }
         public DbSet<Notification> Notification { get; set; }
+
 
     }
 }
