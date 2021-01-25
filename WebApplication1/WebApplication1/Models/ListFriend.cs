@@ -15,7 +15,6 @@ namespace WebApplication1.Models
         public int idFriend { get; set; }
         public DateTime dateAdded { get; set; }
         public bool state { get; set; }
-        public User user { get; set; }
-        public User friend { get; set; }
+        
     }
 }
