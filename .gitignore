@@ -4,3 +4,9 @@
 *.cache
 *.cache
 *.CopyComplete
+*.cache
+*.exe
+*.xml
+*.cache
+*.props
+*.csproj
