@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using WebApplication1.Models.Dtos;
 using WebApplication1.Repository.IRepository;
 
@@ -35,5 +36,18 @@ namespace WebApplication1.Controllers
             return Ok(listTypesDto);
         }
 
+
+        [HttpGet("{idType:int}", Name = "GetTypeOfNotificationsById")]
+        public IActionResult GetTypeOfNotificationsById(int idType)
+        {
+            var itemTypeOfNotifications = _tnRepo.GetTypeOfNotificationsById(idType);
+            if(itemTypeOfNotifications == null)
+            {
+                ModelState.AddModelError("error:", "Type of notification not foud");
+                return NotFound(ModelState);
+            }
+            var itemTypeOfNotificationDto = _mapper.Map<TypeOfNotificationDto>(itemTypeOfNotifications);
+            return Ok(itemTypeOfNotificationDto);
+        }
     }
 }
