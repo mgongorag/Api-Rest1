@@ -24,7 +24,7 @@ namespace WebApplication1.Data
         public DbSet<Gender> Gender { get; set; }
         public DbSet<ImagePost> ImagePost { get; set; }
         public DbSet<Post> Post { get; set; }
-        public DbSet<TypeOfNotifications> TypeOfNotification { get; set; }
+        public DbSet<TypeOfNotifications> TypeOfNotification  { get; set; }
         public DbSet<TypeOfPost> TypeOfPost { get; set; }
         public DbSet<User> User { get; set; }
         public DbSet<ListFriend> ListFriend { get; set; }
