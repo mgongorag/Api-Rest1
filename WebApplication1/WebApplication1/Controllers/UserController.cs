@@ -1,0 +1,74 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
+using WebApplication1.Models.Dtos;
+using WebApplication1.Repository.IRepository;
+
+namespace WebApplication1.Controllers
+{
+    [Route("api/user")]
+    [ApiController]
+    public class UserController : Controller
+    {
+        private readonly IUserRepository _usrRepor;
+        private readonly IMapper _mapper;
+
+        public UserController(IUserRepository usrRepo, IMapper mapper)
+        {
+            _usrRepor = usrRepo;
+            _mapper = mapper;
+        }
+
+        [HttpPost]
+        public IActionResult Register([FromBody] UserRegisterDto userRegisterDto)
+        {
+            /*if(userRegisterDto.firstName == null ||
+                userRegisterDto.lastName == null ||
+                userRegisterDto.email == null ||
+                userre)*/
+
+            if (_usrRepor.existEmail(userRegisterDto.email))
+            {
+                ModelState.AddModelError("", "The email already exist");
+                return StatusCode(404, ModelState);
+            }
+
+            if (_usrRepor.existUsername(userRegisterDto.username))
+            {
+                ModelState.AddModelError("", "The username already exist");
+                return StatusCode(404, ModelState);
+            }
+
+            var user = _mapper.Map<User>(userRegisterDto);
+            if (!_usrRepor.registerUser(user))
+            {
+                ModelState.AddModelError("", $"We have problems with register this user");
+                return StatusCode(500, ModelState);
+            }
+
+            return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
+
+        }
+
+        [HttpGet("UserId:int", Name = "GetUser")]
+        public IActionResult GetUser(int UserId)
+        {
+            var itemUser = _usrRepor.getUser(UserId);
+            if(itemUser == null)
+            {
+                ModelState.AddModelError("", "Not found");
+                return StatusCode(404, ModelState);
+            }
+
+            var itemUserDto = _mapper.Map<UserDto>(itemUser);
+            return Ok(itemUserDto);
+        }
+
+
+    }
+}
