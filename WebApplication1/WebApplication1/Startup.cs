@@ -33,6 +33,7 @@ namespace WebApplication1
 
             services.AddDbContext<Data.ApplicationDbContext>(Options => Options.UseSqlServer(Configuration.GetConnectionString("DeveloperConnection")));
             services.AddScoped<ITypeOfNotificationRepository, TypeOfNotificationRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(SocialMapper));
             services.AddControllers();
         }
