@@ -19,5 +19,10 @@ namespace WebApplication1.Repository
         {
             return _db.TypeOfNotification.OrderBy(c => c.name).ToList();
         }
+
+        public TypeOfNotifications GetTypeOfNotificationsById(int id)
+        {
+            return _db.TypeOfNotification.FirstOrDefault(c => c.idType == id);
+        }
     }
 }
