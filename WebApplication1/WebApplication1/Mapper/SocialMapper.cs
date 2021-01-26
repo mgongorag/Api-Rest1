@@ -13,6 +13,9 @@ namespace WebApplication1.Mapper
         public SocialMapper()
         {
             CreateMap<TypeOfNotifications, TypeOfNotificationDto>().ReverseMap();
+            CreateMap<User, UserRegisterDto>().ReverseMap();
+            CreateMap<User, UserDto>().ReverseMap();
+
         }
     }
 }
