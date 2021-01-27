@@ -10,7 +10,9 @@ namespace WebApplication1.Models
     {
         [Key]
         public int idImage { get; set; }
-        [Required]
+        [Required(ErrorMessage ="Path is required")]
         public string path { get; set; }
+        public bool state { get; set; }
+
     }
 }

@@ -5,20 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.Dtos
 {
-    public class User
+    public class UserDto
     {
         [Key]
-        public int  idUSer { get; set; }
+        public int idUSer { get; set; }
         [Required(ErrorMessage = "The first name is required")]
-        [StringLength(50,MinimumLength = 3, ErrorMessage = "First Name should be minimum 3 characters and a maximum of 50 characters")]
+        [StringLength(50, MinimumLength = 3, ErrorMessage = "First Name should be minimum 3 characters and a maximum of 50 characters")]
         public string firstName { get; set; }
 
         [Required(ErrorMessage = "The last name is required")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Last Name should be minimum 3 characters and a maximum of 50 characters")]
         public string lastName { get; set; }
-        [Required (ErrorMessage = "The birthday is required")]
+        [Required(ErrorMessage = "The birthday is required")]
         [RegularExpression("^\\d{4}([\\-/.])(0?[1-9]|1[1-2])\\1(3[01]|[12][0-9]|0?[1-9])$")]
         public string birthday { get; set; }
         public int idGender { get; set; }
@@ -32,12 +32,8 @@ namespace WebApplication1.Models
         [DataType(DataType.EmailAddress)]
         [EmailAddress]
         public string email { get; set; }
-        [Required(ErrorMessage ="Password is required")]
-        [RegularExpression("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[$@$!%*?&])([A-Za-z\\d$@$!%*?&]|[^ ]){8,30}$", ErrorMessage = "the password needs at least 8 characters, numerical values a capital letter and a sign")]
-        public string password { get; set; }
+       
         public bool isVerificate { get; set; }
-        public DateTime dateCreated { get; set; }
-        public DateTime lastSession { get; set; }
-
+       
     }
 }
