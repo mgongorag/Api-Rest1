@@ -27,7 +27,7 @@ namespace WebApplication1.Models.Dtos
       
         [Required(ErrorMessage = "The username is required")]
         [StringLength(15, MinimumLength = 3, ErrorMessage = "Username should be minimum 3 characters and a maximum of 15 characters")]
-        [RegularExpression("([a-z]{1,1})([a-z0-9_]{3,15})", ErrorMessage = "Only characters and numeric values are allowed")]
+        [RegularExpression("([a-zA-Z]{1,1})([a-zA-Z0-9_]{3,15})", ErrorMessage = "Only characters and numeric values are allowed")]
         public string username { get; set; }
         [Required(ErrorMessage = "Email is required")]
         [DataType(DataType.EmailAddress)]
@@ -56,5 +56,7 @@ namespace WebApplication1.Models.Dtos
 
             return Convert.ToBase64String(EncryptedByte);
         }
+
+        
     }
 }
