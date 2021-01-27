@@ -47,5 +47,15 @@ namespace WebApplication1.Repository
             //return _db.User.Include(u => u.gender).Where(u => u.idGender ==)
         }
 
+        public User LoginAuth(string username, string password)
+        {
+            var user = _db.User.FirstOrDefault(x => x.username == username && x.password == UserRegisterDto.EncrypthPassword(password));
+            if(user == null)
+            {
+                return null;
+            }
+
+            return user;
+        }
     }
 }
