@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -27,11 +28,12 @@ namespace WebApplication1.Controllers
         [HttpPost]
         public IActionResult Register([FromBody] UserRegisterDto userRegisterDto)
         {
-            /*if(userRegisterDto.firstName == null ||
-                userRegisterDto.lastName == null ||
-                userRegisterDto.email == null ||
-                userre)*/
-
+            userRegisterDto.username = userRegisterDto.username.ToLower().Trim();
+            userRegisterDto.email = userRegisterDto.email.ToLower().Trim();
+            userRegisterDto.firstName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(userRegisterDto.firstName);
+            userRegisterDto.lastName = new CultureInfo("en-US", false).TextInfo.ToTitleCase(userRegisterDto.lastName);
+            userRegisterDto.password = UserRegisterDto.EncrypthPassword(userRegisterDto.password);
+                
             if (_usrRepor.existEmail(userRegisterDto.email))
             {
                 ModelState.AddModelError("", "The email already exist");
