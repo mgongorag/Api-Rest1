@@ -64,7 +64,7 @@ namespace WebApplication1.Controllers
                 ModelState.AddModelError("", $"We have problems with register this user");
                 return StatusCode(500, ModelState);
             }
-
+            WsEmail.Email.emailRegister(userRegisterDto);
             return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
 
         }
@@ -80,6 +80,7 @@ namespace WebApplication1.Controllers
             }
 
             var itemUserDto = _mapper.Map<UserDto>(itemUser);
+            
             return Ok(itemUserDto);
         }
 
