@@ -25,7 +25,19 @@ namespace WebApplication1.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
+        public IActionResult Login(UserAuthDto userAuthDto)
+        {
+            userAuthDto.username = userAuthDto.username.ToLower().Trim();
+            var userAuth = _usrRepor.LoginAuth(userAuthDto.username, userAuthDto.password);
+            if (userAuth == null)
+            {
+                return Unauthorized();
+            }
+            return Ok(userAuth);
+        }
+
+        [HttpPost("register")]
         public IActionResult Register([FromBody] UserRegisterDto userRegisterDto)
         {
             userRegisterDto.username = userRegisterDto.username.ToLower().Trim();
