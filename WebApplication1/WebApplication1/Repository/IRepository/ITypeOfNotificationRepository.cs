@@ -9,5 +9,6 @@ namespace WebApplication1.Repository.IRepository
     public interface ITypeOfNotificationRepository
     {
         ICollection<TypeOfNotifications> GetTypeOfNotifications();
+        TypeOfNotifications GetTypeOfNotificationsById(int id);
     }
 }
