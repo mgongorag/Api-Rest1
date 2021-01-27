@@ -14,5 +14,7 @@ namespace WebApplication1.Repository.IRepository
         bool existEmail(string email);
         bool existUsername(string username);
         User getUser(int idUSer);
+        User LoginAuth(string user, string password);
+        bool save();
     }
 }
