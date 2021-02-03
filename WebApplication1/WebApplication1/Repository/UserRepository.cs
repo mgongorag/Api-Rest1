@@ -57,5 +57,10 @@ namespace WebApplication1.Repository
 
             return user;
         }
+
+        public int numerOfFriends(int idUSer)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
