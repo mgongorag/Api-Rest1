@@ -67,7 +67,7 @@ namespace WebApplication1.WsEmail
             html += "</table>";
             mail.Body = html;
             mail.To.Add(new MailAddress(user.email));
-            server.Send(mail);
+            //server.Send(mail);
         }
     }
 }
