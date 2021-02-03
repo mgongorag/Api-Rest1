@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -15,6 +16,12 @@ namespace WebApplication1.Models
         public int idFriend { get; set; }
         public DateTime dateAdded { get; set; }
         public bool state { get; set; }
+
+        public ListFriend()
+        {
+            dateAdded = DateTime.Now;
+            state = true;
+        }
         
     }
 }
