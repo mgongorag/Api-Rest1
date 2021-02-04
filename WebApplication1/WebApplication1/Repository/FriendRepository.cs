@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebApplication1.Data;
 using WebApplication1.Models;
+using WebApplication1.Models.Dtos;
 using WebApplication1.Repository.IRepository;
 
 namespace WebApplication1.Repository
@@ -42,12 +43,12 @@ namespace WebApplication1.Repository
             return success;
         }
 
-        public bool deleteFriend(ListFriend listFriend)
+        public bool deleteFriend(ListFriendDto listFriend)
         {
             throw new NotImplementedException();
         }
 
-        public bool existFriend(ListFriend listFriend)
+        public bool existFriend(ListFriendDto listFriend)
         {
             return _db.ListFriend.Any(lf => lf.idUser == listFriend.idUser && lf.idFriend == listFriend.idFriend);
         }
