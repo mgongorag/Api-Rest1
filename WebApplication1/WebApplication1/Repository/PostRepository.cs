@@ -20,7 +20,10 @@ namespace WebApplication1.Repository
 
         public ICollection<Post> GetAllPostByIdFriend(int idUSer)
         {
-            return _db.Post.Where(p => p.idUser == idUSer).OrderByDescending(p => p.date).ToList();
+            return _db.Post.Where(p => p.idUser == idUSer)
+                           .Include(p => p.typeOfPost)
+                           .Include(p => p.user)
+                           .OrderByDescending(p => p.date).ToList();
         }
 
         public ICollection<Post> GetAllPostFromFriends(int idUser)
@@ -31,6 +34,11 @@ namespace WebApplication1.Repository
         public ICollection<Post> GetAllProfilePictures(int idUser)
         {
             throw new NotImplementedException();
+        }
+
+        public Post GetPostById(int idPost)
+        {
+            return _db.Post.FirstOrDefault(p => p.idPost == idPost);
         }
     }
 }
