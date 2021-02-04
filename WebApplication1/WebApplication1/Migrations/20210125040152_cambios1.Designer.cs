@@ -205,7 +205,7 @@ namespace WebApplication1.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("idGenter")
+                    b.Property<int>("idGender")
                         .HasColumnType("int");
 
                     b.Property<bool>("isVerificate")
@@ -230,7 +230,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("idUSer");
 
-                    b.HasIndex("idGenter");
+                    b.HasIndex("idGender");
 
                     b.ToTable("User");
                 });
@@ -277,7 +277,7 @@ namespace WebApplication1.Migrations
                 {
                     b.HasOne("WebApplication1.Models.Gender", "gender")
                         .WithMany()
-                        .HasForeignKey("idGenter")
+                        .HasForeignKey("idGender")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

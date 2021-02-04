@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Helpers;
 using WebApplication1.Models;
 using WebApplication1.Models.Dtos;
 using WebApplication1.Repository.IRepository;
@@ -48,21 +49,18 @@ namespace WebApplication1.Controllers
                 
             if (_usrRepor.existEmail(userRegisterDto.email))
             {
-                ModelState.AddModelError("", "The email already exist");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.EmailAlreadyExist, MessageError.EmailExist));
             }
 
             if (_usrRepor.existUsername(userRegisterDto.username))
             {
-                ModelState.AddModelError("", "The username already exist");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.USERNAME_IS_ALREADY_IN_USE, MessageError.UsernameExist));
             }
 
             var user = _mapper.Map<User>(userRegisterDto);
             if (!_usrRepor.registerUser(user))
             {
-                ModelState.AddModelError("", $"We have problems with register this user");
-                return StatusCode(500, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.NotSuccess, MessageError.NotSuccess));
             }
             WsEmail.Email.emailRegister(userRegisterDto);
             return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
@@ -75,8 +73,7 @@ namespace WebApplication1.Controllers
             var itemUser = _usrRepor.getUser(UserId);
             if(itemUser == null)
             {
-                ModelState.AddModelError("", "Not found");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.NotFound, MessageError.NOT_FOUND));
             }
 
             var itemUserDto = _mapper.Map<UserDto>(itemUser);

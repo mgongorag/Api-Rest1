@@ -13,6 +13,9 @@ namespace WebApplication1.Helpers
         FriendAlreadyExist = "Friend Already Exist",
         FriendHasAlreadyBeenRemoved = "Friend has already been bemoved",
         UserDontExist = "User don't exist",
-        EmailExist = "Email already exist";
+        EmailExist = "Email already exist",
+        UsernameExist = "This username is already in use ",
+        NOT_FOUND = "The requested record does not exist",
+        BAD_REQUEST = "Bad request, check the documentation";
     }
 }
