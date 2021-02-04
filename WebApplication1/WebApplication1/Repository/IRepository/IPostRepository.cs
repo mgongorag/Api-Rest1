@@ -6,10 +6,11 @@ using WebApplication1.Models;
 
 namespace WebApplication1.Repository.IRepository
 {
-    interface IPostRepository
+    public interface IPostRepository
     {
         ICollection<Post> GetAllPostFromFriends(int idUser);
         ICollection<Post> GetAllPostByIdFriend(int idUSer);
         ICollection<Post> GetAllProfilePictures(int idUser);
+        Post GetPostById(int idPost);
     }
 }

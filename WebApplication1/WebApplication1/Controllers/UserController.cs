@@ -69,7 +69,7 @@ namespace WebApplication1.Controllers
 
         }
 
-        [HttpGet("UserId:int", Name = "GetUser")]
+        [HttpGet("{UserId:int}", Name = "GetUser")]
         public IActionResult GetUser(int UserId)
         {
             var itemUser = _usrRepor.getUser(UserId);

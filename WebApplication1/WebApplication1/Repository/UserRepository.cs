@@ -43,7 +43,8 @@ namespace WebApplication1.Repository
 
         public User getUser(int idUSer)
         {
-            return _db.User.FirstOrDefault(c => c.idUSer == idUSer);
+            return _db.User.Include(u => u.gender)
+                            .FirstOrDefault(u => u.idUSer == idUSer);
             //return _db.User.Include(u => u.gender).Where(u => u.idGender ==)
         }
 
@@ -61,6 +62,12 @@ namespace WebApplication1.Repository
         public int numerOfFriends(int idUSer)
         {
             throw new NotImplementedException();
+        }
+
+        public bool existUserByID(int idUser)
+        {
+            bool exist = _db.User.Any(c => c.idUSer == idUser);
+            return exist;
         }
     }
 }
