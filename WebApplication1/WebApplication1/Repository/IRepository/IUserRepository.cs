@@ -16,6 +16,7 @@ namespace WebApplication1.Repository.IRepository
         User getUser(int idUSer);
         User LoginAuth(string user, string password);
         int numerOfFriends(int idUSer);
+        bool existUserByID(int idUser);
         bool save();
     }
 }
