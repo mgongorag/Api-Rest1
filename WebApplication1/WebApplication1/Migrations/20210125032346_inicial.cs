@@ -85,7 +85,7 @@ namespace WebApplication1.Migrations
                     firstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     lastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     birthday = table.Column<string>(type: "nvarchar(10)", nullable: false),
-                    idGenter = table.Column<int>(type: "int", nullable: false),
+                    idGender = table.Column<int>(type: "int", nullable: false),
                     username = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     email = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     password = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -97,8 +97,8 @@ namespace WebApplication1.Migrations
                 {
                     table.PrimaryKey("PK_User", x => x.idUSer);
                     table.ForeignKey(
-                        name: "FK_User_Gender_idGenter",
-                        column: x => x.idGenter,
+                        name: "FK_User_Gender_idGender",
+                        column: x => x.idGender,
                         principalTable: "Gender",
                         principalColumn: "idGender",
                         onDelete: ReferentialAction.Cascade);
@@ -184,9 +184,9 @@ namespace WebApplication1.Migrations
                 column: "idUser");
 
             migrationBuilder.CreateIndex(
-                name: "IX_User_idGenter",
+                name: "IX_User_idGender",
                 table: "User",
-                column: "idGenter");
+                column: "idGender");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
