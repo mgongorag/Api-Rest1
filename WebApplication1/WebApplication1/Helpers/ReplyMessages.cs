@@ -9,5 +9,11 @@ namespace WebApplication1.Helpers
     {
         public int code { get; set; }
         public string message { get; set; }
+
+        public ReplyMessages(int code, string message)
+        {
+            this.code = code;
+            this.message = message;
+        }
     }
 }

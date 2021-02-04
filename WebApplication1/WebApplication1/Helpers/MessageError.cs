@@ -11,6 +11,8 @@ namespace WebApplication1.Helpers
         NotSuccess = "Han error has been ocurred",
         Success = "Operation executed successfully ",
         FriendAlreadyExist = "Friend Already Exist",
-        FriendHasAlreadyBeenRemoved = "Friend has already been bemoved";
+        FriendHasAlreadyBeenRemoved = "Friend has already been bemoved",
+        UserDontExist = "User don't exist",
+        EmailExist = "Email already exist";
     }
 }

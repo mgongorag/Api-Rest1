@@ -10,6 +10,8 @@ namespace WebApplication1.Helpers
         NotSuccess = 0,
         Success = 1,
         FriendAlreadyExist = 10,
-        FriendHasAlreadyBeenRemoved = 11
+        FriendHasAlreadyBeenRemoved = 11,
+        UserDontExist = 12,
+        EmailAlreadyExist = 13
     }
 }
