@@ -15,7 +15,7 @@ namespace WebApplication1.Mapper
             CreateMap<TypeOfNotifications, TypeOfNotificationDto>().ReverseMap();
             CreateMap<User, UserRegisterDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
-
+            CreateMap<ListFriend, ListFriendDto>().ReverseMap();
         }
     }
 }
