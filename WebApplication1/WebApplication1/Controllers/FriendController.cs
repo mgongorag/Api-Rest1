@@ -50,7 +50,7 @@ namespace WebApplication1.Controllers
 
             }
             //return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
-            return Json( new ReplyMessages(1, "Agregado"));
+            return Json(new ReplyMessages((int)ErrorCode.Success, MessageError.Success));
         }
 
 
