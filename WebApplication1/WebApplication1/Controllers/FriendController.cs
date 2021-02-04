@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Helpers;
 using WebApplication1.Models;
+using WebApplication1.Models.Dtos;
 using WebApplication1.Repository;
 using WebApplication1.Repository.IRepository;
 
@@ -15,24 +17,40 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class FriendController : Controller
     {
-        private readonly IMapper _imapper;
-        private readonly FriendRepository _ifrnRepo;
+        private readonly IMapper _mapper;
+        private readonly IFriendRepository _ifrnRepo;
+        private readonly IUserRepository _usrRepository;
 
-        public FriendController(IMapper imapper, FriendRepository ifrnRepo)
+        public FriendController(IMapper mapper, IFriendRepository ifrnRepo, IUserRepository userRepository)
         {
-            _imapper = imapper;
+            _mapper = mapper;
             _ifrnRepo = ifrnRepo;
+            _usrRepository = userRepository;
         }
 
 
         [HttpPost("AddFriend")]
-        public IActionResult AddFriend(ListFriend listFriend)
+        public IActionResult AddFriend( [FromBody] ListFriendDto listFriendDto )
         {
-            if (_ifrnRepo.existFriend(listFriend))
+
+            if (!_usrRepository.existUserByID( listFriendDto.idUser ) || !_usrRepository.existUserByID( listFriendDto.idFriend ))
             {
-                return BadRequest(listFriend);
+                return Json( new ReplyMessages((int)ErrorCode.UserDontExist, MessageError.UserDontExist));
             }
 
+            if (_ifrnRepo.existFriend( listFriendDto ))
+            {
+                return Json ( new ReplyMessages((int)ErrorCode.FriendAlreadyExist, MessageError.FriendAlreadyExist) );
+            }
+
+            var listFriend = _mapper.Map<ListFriend>(listFriendDto);
+            if (!_ifrnRepo.addFriend(listFriend))
+            {
+                return Json(new ReplyMessages((int)ErrorCode.NotSuccess, MessageError.NotSuccess));
+
+            }
+            //return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
+            return Json( new ReplyMessages(1, "Agregado"));
         }
 
 
