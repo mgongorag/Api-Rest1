@@ -34,6 +34,8 @@ namespace WebApplication1
             services.AddDbContext<Data.ApplicationDbContext>(Options => Options.UseSqlServer(Configuration.GetConnectionString("DeveloperConnection")));
             services.AddScoped<ITypeOfNotificationRepository, TypeOfNotificationRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
+            services.AddScoped<IFriendRepository, FriendRepository > ();
             services.AddAutoMapper(typeof(SocialMapper));
             services.AddControllers();
         }
