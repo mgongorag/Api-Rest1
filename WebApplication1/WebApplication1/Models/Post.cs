@@ -22,5 +22,11 @@ namespace WebApplication1.Models
         [ForeignKey("idTypePost")]
         public TypeOfPost typeOfPost { get; set; }
 
+        public Post()
+        {
+            this.date = DateTime.Now;
+            this.state = true;
+        }
+
     }
 }
