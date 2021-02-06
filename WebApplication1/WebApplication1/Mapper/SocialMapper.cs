@@ -17,6 +17,10 @@ namespace WebApplication1.Mapper
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<ListFriend, ListFriendDto>().ReverseMap();
             CreateMap<Post, PostDto>().ReverseMap();
+            CreateMap<User, PostUserDto>().ReverseMap();
+            CreateMap<Post, CreatePostDto>().ReverseMap();
+            CreateMap<ImagePost, ImagePostDto>().ReverseMap();
+            
         }
     }
 }
