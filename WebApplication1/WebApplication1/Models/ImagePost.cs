@@ -16,5 +16,9 @@ namespace WebApplication1.Models
         public bool state { get; set; }
         [ForeignKey("idPost")]
         public int idPost { get; set; }
+        public ImagePost()
+        {
+            this.state = true;
+        }
     }
 }
