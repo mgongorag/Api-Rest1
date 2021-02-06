@@ -7,15 +7,20 @@ using System.Threading.Tasks;
 
 namespace WebApplication1.Models.Dtos
 {
-    public class PostDto
+    public class ImagePostDto
     {
-        [Key]
-        public int idPost { get; set; }
-        public string description { get; set; }
-        public DateTime date { get; set; }
-        public TypeOfPost typeOfPost { get; set; }
-        public List<ImagePostDto> images { get; set; }
-        public PostUserDto user { get; set; }
 
+        [Key]
+        public int idImage { get; set; }
+        public string path { get; set; }
+        public bool state { get; set; }
+
+        public int idPost { get; set; }
+
+
+        public ImagePostDto()
+        {
+            this.state = true;
+        }
     }
 }

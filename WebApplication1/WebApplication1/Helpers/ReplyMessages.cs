@@ -7,12 +7,12 @@ namespace WebApplication1.Helpers
 {
     public class ReplyMessages
     {
-        public int code { get; set; }
+        public int status { get; set; }
         public string message { get; set; }
 
-        public ReplyMessages(int code, string message)
+        public ReplyMessages(int status, string message)
         {
-            this.code = code;
+            this.status = status;
             this.message = message;
         }
     }
