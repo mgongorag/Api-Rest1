@@ -10,12 +10,13 @@ namespace WebApplication1.Helpers
         NotSuccess = 500,
         Success = 200,
         NotFound = 404,
+        BAD_REQUEST = 400,
         FriendAlreadyExist = 10,
         FriendHasAlreadyBeenRemoved = 11,
         UserDontExist = 12,
         EmailAlreadyExist = 13,
         USERNAME_IS_ALREADY_IN_USE = 14,
-        BAD_REQUEST = 400
+
         
     }
 }
