@@ -10,8 +10,8 @@ using WebApplication1.Data;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210125032346_inicial")]
-    partial class inicial
+    [Migration("20210131213132_v4")]
+    partial class v4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -143,7 +143,7 @@ namespace WebApplication1.Migrations
                     b.ToTable("Post");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.TypeOfNotification", b =>
+            modelBuilder.Entity("WebApplication1.Models.TypeOfNotifications", b =>
                 {
                     b.Property<int>("idType")
                         .ValueGeneratedOnAdd()
@@ -164,7 +164,7 @@ namespace WebApplication1.Migrations
 
                     b.HasKey("idType");
 
-                    b.ToTable("TypeOfNotifications");
+                    b.ToTable("TypeOfNotification");
                 });
 
             modelBuilder.Entity("WebApplication1.Models.TypeOfPost", b =>
@@ -243,7 +243,7 @@ namespace WebApplication1.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebApplication1.Models.TypeOfNotification", "typeOfNotification")
+                    b.HasOne("WebApplication1.Models.TypeOfNotifications", "typeOfNotification")
                         .WithMany()
                         .HasForeignKey("idType")
                         .OnDelete(DeleteBehavior.Cascade)

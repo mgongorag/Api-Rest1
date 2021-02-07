@@ -5,18 +5,20 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.Dtos
 {
-    public class ImagePost
+    public class ImagePostDto
     {
+
         [Key]
         public int idImage { get; set; }
-        [Required(ErrorMessage ="Path is required")]
         public string path { get; set; }
         public bool state { get; set; }
-        [ForeignKey("idPost")]
+
         public int idPost { get; set; }
-        public ImagePost()
+
+
+        public ImagePostDto()
         {
             this.state = true;
         }

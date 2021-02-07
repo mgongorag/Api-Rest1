@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using WebApplication1.Helpers;
 using WebApplication1.Models;
 using WebApplication1.Models.Dtos;
 using WebApplication1.Repository.IRepository;
+using Microsoft.Extensions.Configuration;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace WebApplication1.Controllers
 {
@@ -18,11 +24,13 @@ namespace WebApplication1.Controllers
     {
         private readonly IUserRepository _usrRepor;
         private readonly IMapper _mapper;
+        private readonly IConfiguration _config;
 
-        public UserController(IUserRepository usrRepo, IMapper mapper)
+        public UserController(IUserRepository usrRepo, IMapper mapper, IConfiguration config)
         {
             _usrRepor = usrRepo;
             _mapper = mapper;
+            _config = config;
         }
 
         [HttpPost("login")]
@@ -34,7 +42,33 @@ namespace WebApplication1.Controllers
             {
                 return Unauthorized();
             }
-            return Ok(userAuth);
+
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, userAuth.idUSer.ToString()),
+                new Claim(ClaimTypes.Name, userAuth.username.ToString())
+            };
+            //Generacion de token
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddDays(1),
+                SigningCredentials = credentials
+            };
+
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+
+            
+            return Ok(new
+            {
+                token = tokenHandler.WriteToken(token)
+            });
+
+
         }
 
         [HttpPost("register")]
@@ -48,41 +82,37 @@ namespace WebApplication1.Controllers
                 
             if (_usrRepor.existEmail(userRegisterDto.email))
             {
-                ModelState.AddModelError("", "The email already exist");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.EmailAlreadyExist, MessageError.EmailExist));
             }
 
             if (_usrRepor.existUsername(userRegisterDto.username))
             {
-                ModelState.AddModelError("", "The username already exist");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.USERNAME_IS_ALREADY_IN_USE, MessageError.UsernameExist));
             }
 
             var user = _mapper.Map<User>(userRegisterDto);
             if (!_usrRepor.registerUser(user))
             {
-                ModelState.AddModelError("", $"We have problems with register this user");
-                return StatusCode(500, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.NotSuccess, MessageError.NotSuccess));
             }
-
+            WsEmail.Email.emailRegister(userRegisterDto);
             return CreatedAtRoute("GetUser", new { userId = user.idUSer }, user);
 
         }
 
-        [HttpGet("UserId:int", Name = "GetUser")]
+        [HttpGet("{UserId:int}", Name = "GetUser")]
         public IActionResult GetUser(int UserId)
         {
             var itemUser = _usrRepor.getUser(UserId);
             if(itemUser == null)
             {
-                ModelState.AddModelError("", "Not found");
-                return StatusCode(404, ModelState);
+                return Json(new ReplyMessages((int)ErrorCode.NotFound, MessageError.NOT_FOUND));
             }
 
             var itemUserDto = _mapper.Map<UserDto>(itemUser);
+            
             return Ok(itemUserDto);
         }
-
 
     }
 }

@@ -1,32 +1,29 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebApplication1.Models
+namespace WebApplication1.Models.Dtos
 {
-    public class Post
+    public class CreatePostDto
     {
-        [Key]
-        public int idPost { get; set; }
-        [StringLength(2000, ErrorMessage = "Only 2000 characters allowed")]
         public string description { get; set; }
         public DateTime date { get; set; }
         public int idUser { get; set; }
-        [ForeignKey("idUser")]
-        public User user { get; set; }
         public bool state { get; set; }
-        public int idTypePost { get; set; }
         [ForeignKey("idTypePost")]
-        public TypeOfPost typeOfPost { get; set; }
+        public int idTypePost { get; set; }
+        public ICollection <IFormFile> images { get; set; }
 
-        public Post()
+        public CreatePostDto()
         {
-            this.date = DateTime.Now;
+            this.date = DateTime.Now.Date;
             this.state = true;
         }
+
 
     }
 }
