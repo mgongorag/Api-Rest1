@@ -58,6 +58,10 @@ namespace WebApplication1
                 });
 
             services.AddControllers();
+
+            //Configuracion CORS
+            services.AddCors();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,12 +76,15 @@ namespace WebApplication1
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+            //Soporte a Cors
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }
     }
 }
